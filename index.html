@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101024">
+  <meta name="description" content="PIXEL PARTY - レトロなミニゲームでハイスコアに挑戦！">
+  <title>PIXEL PARTY | RETRO ARCADE</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a href="./" class="logo"><span>PP</span> PIXEL PARTY</a>
+    <div class="top-actions">
+      <span class="online"><i></i> ARCADE MODE</span>
+      <button id="soundToggle" class="small-btn">♫ SOUND ON</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">★ INSERT COIN TO PLAY ★</p>
+      <h1>PIXEL <span>PARTY</span></h1>
+      <p class="hero-copy">3 MINI GAMES. INFINITE FUN.</p>
+      <div class="pixel-line"></div>
+      <p class="description">遊んで、極めて、友達とスコアを競おう。</p>
+    </section>
+
+    <section class="stats">
+      <div class="stat"><span>GAMES</span><strong>03</strong></div>
+      <div class="stat"><span>YOUR BEST</span><strong id="totalBest">0</strong></div>
+      <div class="stat"><span>PLAY COUNT</span><strong id="playCount">0</strong></div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div><p class="eyebrow">SELECT YOUR GAME</p><h2>GAME SELECT<span class="cursor">_</span></h2></div>
+        <span class="section-number">01 / 03</span>
+      </div>
+
+      <div class="game-grid">
+        <article class="game-card quick-card">
+          <div class="game-art art-quick">
+            <span class="art-label">REACTION</span>
+            <div class="target-art">✦</div>
+            <span class="art-number">01</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title"><h3>QUICK TAP</h3><span class="tag">SPEED</span></div>
+            <p>ターゲットをクリック！30秒で何点取れる？</p>
+            <div class="card-footer"><span>BEST <b id="best-quick">0</b></span><button data-game="quick" class="play-btn">PLAY ▶</button></div>
+          </div>
+        </article>
+
+        <article class="game-card dodge-card">
+          <div class="game-art art-dodge">
+            <span class="art-label">SURVIVAL</span>
+            <span class="dodge-player">◈</span>
+            <span class="meteor meteor-a">✹</span><span class="meteor meteor-b">✦</span>
+            <span class="art-number">02</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title"><h3>DODGE RUSH</h3><span class="tag">ACTION</span></div>
+            <p>落下する障害物を避けて、限界まで生き残れ。</p>
+            <div class="card-footer"><span>BEST <b id="best-dodge">0</b></span><button data-game="dodge" class="play-btn">PLAY ▶</button></div>
+          </div>
+        </article>
+
+        <article class="game-card memory-card">
+          <div class="game-art art-memory">
+            <span class="art-label">BRAIN POWER</span>
+            <div class="mini-cards"><i>★</i><i>?</i><i>◆</i><i>?</i></div>
+            <span class="art-number">03</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title"><h3>MEMORY FLIP</h3><span class="tag">PUZZLE</span></div>
+            <p>カードをめくってペアを揃えよう。目指せ最少手数！</p>
+            <div class="card-footer"><span>BEST <b id="best-memory">0</b></span><button data-game="memory" class="play-btn">PLAY ▶</button></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="arcade" class="arcade hidden">
+      <div class="section-heading">
+        <div><p class="eyebrow">NOW PLAYING</p><h2 id="gameTitle">GAME</h2></div>
+        <button id="exitBtn" class="small-btn">✕ EXIT</button>
+      </div>
+
+      <div class="arcade-screen">
+        <div class="arcade-hud">
+          <span id="gameStatus">READY</span>
+          <span id="gameTimer">TIME 30</span>
+          <span id="gameScore">SCORE 0</span>
+        </div>
+        <div id="gameArea" class="game-area"></div>
+        <div id="gameMessage" class="game-message">
+          <h3 id="messageTitle">READY PLAYER ONE</h3>
+          <p id="messageText">準備ができたらスタート！</p>
+          <button id="actionBtn" class="play-btn large">▶ START GAME</button>
+        </div>
+      </div>
+
+      <div class="game-help" id="gameHelp">ゲームを選んでスタートしよう。</div>
+      <div id="memoryControls" class="memory-controls hidden">
+        <button id="resetMemory" class="small-btn">↻ RETRY</button>
+      </div>
+      <div class="share-row">
+        <div><span class="eyebrow">YOUR RECORD</span><p>BEST SCORE: <strong id="currentBest">0</strong></p></div>
+        <button id="shareBtn" class="small-btn">↗ SHARE SCORE</button>
+      </div>
+    </section>
+
+    <section class="ranking">
+      <div class="section-heading">
+        <div><p class="eyebrow">PERSONAL RECORDS</p><h2>YOUR RECORDS</h2></div>
+        <span class="trophy">🏆</span>
+      </div>
+      <div class="record-list">
+        <div><span>01 <b>QUICK TAP</b></span><strong id="record-quick">0 <small>PTS</small></strong></div>
+        <div><span>02 <b>DODGE RUSH</b></span><strong id="record-dodge">0 <small>PTS</small></strong></div>
+        <div><span>03 <b>MEMORY FLIP</b></span><strong id="record-memory">0 <small>PTS</small></strong></div>
+      </div>
+      <p class="record-note">記録はこのブラウザに保存されるよ。友達との対戦は、スコアを共有して勝負しよう！</p>
+      <button id="resetRecords" class="text-btn">記録をリセット</button>
+    </section>
+  </main>
+
+  <footer>
+    <div class="logo"><span>PP</span> PIXEL PARTY</div>
+    <p>PRESS START TO MAKE MEMORIES.</p>
+    <small>© 2026 PIXEL PARTY · FAN-MADE ARCADE PROJECT</small>
+  </footer>
+</body>
+</html>
